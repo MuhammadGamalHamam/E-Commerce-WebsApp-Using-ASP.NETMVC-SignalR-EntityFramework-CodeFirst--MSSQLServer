@@ -1,0 +1,583 @@
+﻿@model List<Item>
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Styles
+{
+    <style>
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            transition: 0.5s ease;
+        }
+
+        #test:hover .overlay {
+            display: inline-block;
+            background: rgba(0, 0, 0, .3);
+        }
+
+        .button {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            /* top: 180px; */
+            bottom: 10px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity .35s ease;
+        }
+
+        #test:hover .button {
+            opacity: 1;
+        }
+    </style>
+}
+
+<div class="container-fluid" style="text-align: center;">
+    <div class="row justify-content-center">
+        <!-- ++++++++++++++++++++++++++++++++++++++++++++ Path Row ++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+        <div class="col-md-11 col-lg-11 col-sm-11 col-11 d-block mt-3" style="text-align: left;">
+            <p>
+                <a href="#" class="text-dark">
+                    <i class="fas fa-home">
+                        <span style="font-family: Raleway;">
+                            Home
+                        </span>
+                    </i>
+                </a>&nbsp;
+                <i class="fas fa-angle-right text-muted">
+                    <span style="font-family: Raleway;">
+                        &nbsp;
+                        Shop
+                    </span>
+                </i>
+            </p>
+            <hr>
+        </div>
+
+        <!-- ++++++++++++++++++++++++++++++++++++++++++++ Items Column +++++++++++++++++++++++++++++++++++++++++++++ -->
+        <div class="col-md-8 col-lg-8 my-2 col-sm-11 col-11" style="display: inline-block;">
+
+            <div class="row justify-content-center" id="myItems">
+                @foreach (var item in Model)
+                {
+                    <div style="display: inline-block;" class="col-sm-11 col-lg-3 col-11 col-md-3 px-0 m-3">
+                        <div class="" id="test" style="position: relative;">
+                            <img src="~/img/products/@item.Picture" class="mx-auto d-block" style="width: 100%; height: auto;">
+                            <div class="overlay"></div>
+                            <div class="button">
+                                @*@Html.ActionLink("Add To Cart ", "Index", "Home", null, new
+                                {
+                                    @class = "btn rounded mx-2 mb-1",
+                                    @style = "text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.9em;"
+                                })
+                                <br>
+                                @Html.ActionLink("Show Details", "Index", "Home", null, new
+                                {
+                                    @class = "btn rounded mx-2 mb-1",
+                                    @style = "text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.87em;"
+                                })*@
+                                <button type="button" class="btn rounded mx-2 mb-1" onclick="AddToCart(@item.ID)"
+                                        style="text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.9em;">
+                                    Add To Cart&nbsp;
+                                </button><br>
+                                <button type="button" class="btn rounded mx-2 mb-1" onclick="ItemDetails(@item.ID)"
+                                   style="text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.9em;">
+                                    Show Details
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="text-center px-3 pb-3 justify-content-center">
+                            <div class="form-text text-muted pt-3 pb-1" style="font-family: Overpass; font-size: 12px;">
+                                @item.Product.Name
+                            </div>
+                            <div class="text-dark" style="font-family: Overpass; font-size: 20px;">@item.Name</div>
+                            <div style="font-family: Overpass;">
+                                @if (item.Discount != 0)
+                                {
+                                    <span style="color: #E7AB3C;">$@String.Format("{0:0.00}", item.Price - ((item.Price * item.Discount) / 100))</span>
+                                    <span class="text-muted"
+                                          style="font-size: 13px; text-decoration: line-through;">$@item.Price</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color: #E7AB3C;">$@item.Price</span>
+                                        <span class="text-muted" style="font-size: 13px; text-decoration: line-through;"></span>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- ********************************************************* Loading More ******************************** -->
+            <div class="row mx-auto py-5 d-flex justify-content-center">
+                <div style="display: inline-block; font-size: 20px;" class="border border-secondary rounded m-1 px-3 py-1">
+                    <i class="fas fa-spinner">
+                        &nbsp;
+                        <a href="#" class="text-dark" style="text-decoration: underline; font-size: large; font-family: Raleway;" onclick="LoadMore()">
+                            Loading More
+                        </a>
+                        @*@Html.ActionLink("Loading More", "Index", "Home", null, new
+                            {
+                                @class = "text-dark",
+                                @style = "text-decoration: underline; font-size: large; font-family: Raleway;"
+                            })*@
+                    </i>
+                </div>
+            </div>
+        </div>
+
+        <!-- --------------------------------------------- Filteration Column ---------------------------------------- -->
+        <div class="col-md-3 my-2 col-lg-3 col-sm-11 col-11" style="display: inline-block; height: 100%;">
+
+            <!-- /*************************************************************** Categories ***************************/ -->
+            <div class="my-2 pl-3 pt-2" style="text-align: left;">
+                <h2>Categories</h2>
+                <div class="form my-3">
+                    <h6><a href="#" style="text-decoration: none;" class="text-dark" id="men" onclick="FilterByCategory(this.id)">Men</a></h6>
+                    <h6><a href="#" style="text-decoration: none;" class="text-dark" id="women" onclick="FilterByCategory(this.id)">Women</a></h6>
+                    <h6><a href="#" style="text-decoration: none;" class="text-dark" id="kids" onclick="FilterByCategory(this.id)">Kids</a></h6>
+                </div>
+            </div>
+
+            <!-- /*************************************************************** Brands *********************************/ -->
+            <div class="my-2 pl-3 py-2" style="text-align: left;">
+                <h2>Brands</h2>
+                <div class="form-check mt-3">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="brands" id="" value="Calvin Klein">
+                        Calvin Klein
+                    </label><br>
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="brands" id="" value="Diesel">
+                        Diesel
+                    </label><br>
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="brands" id="" value="Polo">
+                        Polo
+                    </label><br>
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="brands" id="" value="Tommy Hilfiger">
+                        Tommy Hilfiger
+                    </label>
+                </div>
+            </div>
+
+            <!-- /************************************************************ Price ************************************/ -->
+            <div class="my-2 px-3 py-2" style="text-align: left;">
+                <h2>Price</h2>
+                <div class="form-group mt-3">
+                    <label for="range">
+                        <input type="range" name="range" id="range" min="10" max="300" step="5" value="175" />&nbsp;&nbsp;
+                    </label>
+                    <output for="range" class="output rounded-lg"></output>
+
+                    <small id="helpId" class="form-text text-muted">Price Range</small>
+                    <br>
+                    <button type="button" class="btn btn-sm" id="btnFilter"
+                            style="font-size: 18px; color: white; background-color: #E7AB3C; width: 100px;">
+                        FILTER
+                    </button>
+                </div>
+            </div>
+
+            <!-- /******************************************************** Colors **************************************/ -->
+            <div class="my-2 pl-3 py-2" style="text-align: left;">
+                <h2>Color</h2>
+                <div class="form my-1 py-2 col-11 col-sm-11 col-md-11 col-lg-11" style="text-align: center;">
+                    <div class="form-group" style="text-align: left; display: inline-block;">
+                        <div class="m-1  py-1">
+                            <a href="#myItems" class="text-muted" style="text-decoration: none;" id="Violet" onclick="FilterByColor(this.id)">
+                                <i class="fas fa-circle" style="font-size: 20px; color: violet;">
+                                    <span style="font-size: 15px; font-family: Raleway"
+                                          class="text-muted">Violet</span>
+                                </i>
+                            </a>
+                        </div>
+                        <div class="m-1  py-1">
+                            <a href="#" class="text-muted" style="text-decoration: none;" id="Yellow" onclick="FilterByColor(this.id)">
+                                <i class="fas fa-circle" style="font-size: 20px; color: yellow;">
+                                    <span style="font-size: 15px; font-family: Raleway"
+                                          class="text-muted">Yellow</span>
+                                </i>
+                            </a>
+                        </div>
+                        <div class="m-1  py-1">
+                            <a href="#" class="text-muted" style="text-decoration: none;" id="Green" onclick="FilterByColor(this.id)">
+                                <i class="fas fa-circle" style="font-size: 20px; color: green;">
+                                    <span style="font-size: 15px; font-family: Raleway"
+                                          class="text-muted">Green</span>
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="text-align: left; display: inline-block;">
+                        <div class="m-1 px-2 py-1">
+                            <a href="#" class="text-muted" style="text-decoration: none;" id="Black" onclick="FilterByColor(this.id)">
+                                <i class="fas fa-circle" style="font-size: 20px; color: black;">
+                                    <span style="font-size: 15px; font-family: Raleway"
+                                          class="text-muted">Black</span>
+                                </i>
+                            </a>
+                        </div>
+                        <div class="m-1 px-2 py-1">
+                            <a href="#" class="text-muted" style="text-decoration: none;" id="Blue" onclick="FilterByColor(this.id)">
+                                <i class="fas fa-circle" style="font-size: 20px; color: #2773BE;">
+                                    <span style="font-size: 15px; font-family: Raleway"
+                                          class="text-muted">Blue</span>
+                                </i>
+                            </a>
+                        </div>
+                        <div class="m-1 px-2 py-1">
+                            <a href="#" class="text-muted" style="text-decoration: none;" id="Red" onclick="FilterByColor(this.id)">
+                                <i class="fas fa-circle" style="font-size: 20px; color: #DC3232;">
+                                    <span style="font-size: 15px; font-family: Raleway"
+                                          class="text-muted">Red</span>
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /********************************************* Size ****************************************************/ -->
+            <div class="my-2 px-3 py-2" style="text-align: left;">
+                <h2>Size</h2>
+                <div>
+                    <div id="sizes" class="form-group mt-3 ml-2">
+                        <button class="btn btn-outline-dark" name="check" type="button" value="s">S</button>
+                        <button class="btn btn-outline-dark" name="check" type="button" value="m">M</button>
+                        <button class="btn btn-outline-dark" name="check" type="button" value="l">L</button>
+                        <button class="btn btn-outline-dark" name="check" type="button" value="xs">XS</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /****************************************** Tags *******************************************************/ -->
+            <div class="my-2 px-3 py-2" style="text-align: left;">
+                <h2>Tags</h2>
+                <div class="form-group mt-3" id="tags">
+                    @*<div style="display: inline-block;" class="border border-secondary rounded m-1 px-3 py-1">
+                        <a class="text-muted" style="text-decoration: none;" name="tag">Towel</a>
+                    </div>
+                    <div style="display: inline-block;" class="border border-secondary rounded m-1 px-3 py-1">
+                        <a class="text-muted" style="text-decoration: none;" name="tag">Shoes</a>
+                    </div>
+                    <div style="display: inline-block;" class="border border-secondary rounded m-1 px-3 py-1">
+                        <a class="text-muted" style="text-decoration: none;" name="tag">Coat</a>
+                    </div>
+                    <div style="display: inline-block;" class="border border-secondary rounded m-1 px-3 py-1">
+                        <a class="text-muted" style="text-decoration: none;" name="tag">Dresses</a>
+                    </div>
+                    <div style="display: inline-block;" class="border border-secondary rounded m-1 px-3 py-1">
+                        <a class="text-muted" style="text-decoration: none;" name="tag">Trousers</a>
+                    </div>
+                    <div style="display: inline-block;" class="border border-secondary rounded m-1 px-3 py-1">
+                        <a class="text-muted" style="text-decoration: none;" name="tag">Men's hats</a>
+                    </div>
+                    <div style="display: inline-block;" class="border border-secondary rounded m-1 px-3 py-1">
+                        <a class="text-muted" style="text-decoration: none;" name="tag">Backpack</a>
+                    </div>*@
+
+                    <button type="button" 
+                            class="text-muted border border-secondary rounded m-1 px-3 py-1" 
+                            style="background-color: white;" onclick="FilterByTagName('Towel')" value="Towel">
+                        Towel
+                    </button>
+                    <button type="button" 
+                            class="text-muted border border-secondary rounded m-1 px-3 py-1" 
+                            style="background-color: white;" onclick="FilterByTagName('Shoes')">
+                        Shoes
+                    </button>
+                    <button type="button" 
+                            class="text-muted border border-secondary rounded m-1 px-3 py-1" 
+                            style="background-color: white;" onclick="FilterByTagName('Coat')">
+                        Coat
+                    </button>
+                    <button type="button" 
+                            class="text-muted border border-secondary rounded m-1 px-3 py-1" 
+                            style="background-color: white;" onclick="FilterByTagName('Dresses')">
+                        Dresses
+                    </button>
+                    <button type="button" 
+                            class="text-muted border border-secondary rounded m-1 px-3 py-1" 
+                            style="background-color: white;" onclick="FilterByTagName('Trousers')">
+                        Trousers
+                    </button>
+                    <button type="button" 
+                            class="text-muted border border-secondary rounded m-1 px-3 py-1" 
+                            style="background-color: white;" onclick="FilterByTagName('Mens hats')">
+                        Mens hats
+                    </button>
+                    <button type="button" 
+                            class="text-muted border border-secondary rounded m-1 px-3 py-1" 
+                            style="background-color: white;" onclick="FilterByTagName('Backpack')">
+                        Backpack
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModel" tabindex="-1" role="dialog" aria-labelledby="myModelTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModelTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="myModelBody">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $('.output').val($('#range').val() + ".00 $");
+
+            $('#range').on("input", function () {
+                $('.output').val(this.value + ".00 $");
+            }).trigger("change");
+
+            //Filter By Sizes
+            $('#sizes button').on('click', function () {
+                $('#sizes button').not(this).prop('class', 'btn btn-outline-dark');
+                $(this).prop('class', 'btn btn-dark');
+                var size = $(this).val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Shop/GetBySize",
+                    data: { itemSize: size },
+                    success: function (response) {
+                        if ($.trim(response) == '') {
+                            $("#myModelTitle").html("Sorry, ");
+                            $("#myModelBody").html("<h5>There Are No Items with " + size + " Size to be Loaded!</h5><h6>Please, Choose another Size or Anything else.</h6>");
+                            $('#myModel').modal('show');
+                        }
+                        else {
+                            $("#myItems").html(response);
+                        }
+                    }
+                });
+            });
+
+            //Filter By Brands
+            $("input[name='brands']").change(function () {
+                var favorite = [];
+                $.each($("input[name='brands']:checked"), function () {
+                    favorite.push($(this).val());
+                });
+
+                //alert("My favourite brands are: " + favorite.join(", "));
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Shop/GetByBrand",
+                    data: { brandNames: favorite.join(",") },
+                    success: function (response) {
+                        //$("#myItems").html(response);
+                        if ($.trim(response) == '') {
+                            //alert("What follows is blank: ");
+                            $("#myModelTitle").html("Sorry, ");
+                            $("#myModelBody").html("<h5>There Are No Items Related to " + favorite.join(", ") + " Brand(s) to be Loaded!</h5><h6>Please, Choose another Brand(s) or Anything else.</h6>");
+                            $('#myModel').modal('show');
+                        }
+                        else {
+                            //alert("What follows is not blank: ");
+                            $("#myItems").html(response);
+                        }
+                    }
+                });
+            });
+
+            //Filter By Price
+            $("#btnFilter").click(function () {
+                var price = $("#range").val();
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Shop/GetByPrice",
+                    data: { priceRange: price },
+                    success: function (response) {
+                        //$("#myItems").html(response);
+                        if ($.trim(response) == '') {
+                            //alert("What follows is blank: ");
+                            $("#myModelTitle").html("Sorry, ");
+                            $("#myModelBody").html("<h5>There Are No Items in Range 10 $ and " + price + " $ to be Loaded!</h5><h6>Please, Choose another Range or Anything else.</h6>");
+                            $('#myModel').modal('show');
+                        }
+                        else {
+                            //alert("What follows is not blank: ");
+                            $("#myItems").html(response);
+                        }
+                    }
+                });
+            });
+
+        });
+
+        function LoadMore() {
+
+            $.ajax({
+                type: "GET",
+                url: "/Shop/LoadMore",
+                data: {},
+                success: function (response) {
+                    //$("#myItems").append(response);
+                    if ($.trim(response) == '') {
+                        //alert("What follows is blank: ");
+                        $("#myModelTitle").html("Sorry, ");
+                        $("#myModelBody").html("<h5>There Are No Items else to be Loaded!</h5>");
+                        $('#myModel').modal('show');
+                    }
+                    else {
+                        //alert("What follows is not blank: ");
+                        $("#myItems").append(response);
+                    }
+                }
+            });
+        }
+
+        function FilterByCategory(categoryType) {
+
+            $.ajax({
+                type: "GET",
+                url: "/Shop/GetByCategory",
+                data: { categoryName: categoryType },
+                success: function (response) {
+                    //$("#myItems").html(response);
+                    if ($.trim(response) == '') {
+                        //alert("What follows is blank: ");
+                        $("#myModelTitle").html("Sorry, ");
+                        $("#myModelBody").html("<h5>There Are No Items Related to " + categoryType + " Category to be Loaded!</h5><h6>Please, Choose another Category or Anything else.</h6>");
+                        $('#myModel').modal('show');
+                    }
+                    else {
+                        //alert("What follows is not blank: ");
+                        $("#myItems").html(response);
+                    }
+                }
+            });
+        }
+
+        function FilterByColor(colValue) {
+            $.ajax({
+                type: "GET",
+                url: "/Shop/GetByColor",
+                data: { color: colValue },
+                success: function (response) {
+                    if ($.trim(response) == '') {
+                        //alert("What follows is blank: ");
+                        $("#myModelTitle").html("Sorry, ");
+                        $("#myModelBody").html("<h5>There Are No Items Related to " + colValue + " Color to be Loaded!</h5><h6>Please, Choose another Color or Anything else.</h6>");
+                        $('#myModel').modal('show');
+                    }
+                    else {
+                        //alert("What follows is not blank: ");
+                        $("#myItems").html(response);
+                    }
+                }
+            });
+        }
+
+        function FilterByTagName(name) {
+            //var name = $(this).val();
+
+            $.ajax({
+                type: "GET",
+                url: "/Shop/GetByTagName",
+                data: { tagName: name },
+                success: function (response) {
+                    if ($.trim(response) == '') {
+                        $("#myModelTitle").html("Sorry, ");
+                        $("#myModelBody").html("<h6>There Are No Items Related to " + name + " Tag to be Loaded!</h6><p>Please, Choose another Tag or Anything else.</p>");
+                        $('#myModel').modal('show');
+                    }
+                    else {
+                        $("#myItems").html(response);
+                    }
+                }
+            });
+        }
+
+        function ItemDetails(itemID) {
+            $.ajax({
+                type: "GET",
+                url: "/Shop/GetItemDetails",
+                data: { id: itemID },
+                success: function (response) {
+                    if ($.trim(response) == '') {
+                        $("#myModelTitle").html("Sorry, ");
+                        $("#myModelBody").html("<h6>This Item Not Found</h6>");
+                        $('#myModel').modal('show');
+                    }
+                    else {
+                        $("#myModelTitle").html("Item Details");
+                        $("#myModelBody").html(response);
+                        $('#myModel').modal('show');
+                    }
+                }
+            });
+        }
+
+        function AddToCart (id) {
+            //var id = document.getElementById("idd").innerHTML;
+            $.ajax({
+                url: "/item/AddCart/" + id,
+                type: "POST",
+
+                //dataType: "json",
+                //traditional: true,
+                //contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert(data);
+                    //alert(typeof data);
+                    //debugger;
+                    if (data == "True") {
+                        alert("Item is Add");
+                    }
+                    if (data == "False") {
+                        alert("Item is out of stock");
+                    }
+
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
+        }
+        //function ReloadDefault() {
+        //    $.ajax({
+        //        type: "GET",
+        //        url: "/Shop/GetDefault",
+        //        data: { },
+        //        success: function (response) {
+        //            $("#myItems").html(response);
+        //        }
+        //    });
+        //}
+
+    </script>
+}

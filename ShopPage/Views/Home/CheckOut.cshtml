@@ -1,0 +1,158 @@
+﻿
+@using ShopPage.Models
+@model List<Item>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        .header {
+            border: 2px solid #EBEBEB;
+            text-align: center;
+            background-color: #F3F3F3;
+            font-size: large;
+            padding: 3%;
+            margin-bottom: 5%;
+        }
+    </style>
+</head>
+<body>
+    <h2>CheckOut</h2>
+    <div class="container">
+        <div style="font-size: large; padding-top: 5%; ">
+            <i class="fas fa-home"></i>   Home > Shop  <span style="color: #B8B8B8;"> > Check Out  </span>
+        </div>
+        <hr>
+
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="header">
+                    click hear to log in
+                </div>
+                <h3 style="font-weight: bold;">Biiling Details</h3>
+                <form>
+                    <div class="row">
+                        <div class="col-6">
+                            Frist Name <span style="color: red;"> *</span><br>
+                            <input type="text" name="FristName" id="FristName" class="form-control" required>
+                        </div>
+                        <div class="col-6">
+                            Last Name <span style="color: red;"> *</span><br>
+                            <input type="text" name="LastName" id="LastName" class="form-control" required>
+                        </div>
+                    </div>
+                    <div>
+                        Company Name <br>
+                        <input type="text" name="CompanyName" id="CompanyName" class="form-control">
+                    </div>
+                    <div>
+                        Country  <span style="color: red;"> *</span><br>
+                        <input type="text" name="Country" id="Country" class="form-control" required>
+                    </div>
+                    <div>
+                        Street Address  <span style="color: red;"> *</span><br>
+                        <input type="text" name="StreetAddress" id="StreetAdress" class="form-control" required>
+                    </div>
+                    <div>
+                        Postcode / ZIP (optional) <br>
+                        <input type="text" name="Postcode" id="PostCode" class="form-control">
+                    </div>
+                    <div>
+                        Town / City  <span style="color: red;"> *</span><br>
+                        <input type="text" name="City" id="City" class="form-control" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            Email Address <span style="color: red;"> *</span><br>
+                            <input type="text" name="Email" id="Email" class="form-control" required>
+                        </div>
+                        <div class="col-6">
+                            Phone <span style="color: red;"> *</span><br>
+                            <input type="text" name="Phone" id="Phone" class="form-control" required>
+                        </div>
+                    </div>
+                    <input type="checkbox" name="IsNew" style="margin-right: 10px;">Create an account?
+                </form>
+            </div>
+
+            <div class="col-5">
+                <div style="padding: 0;">
+                    <input type="text" name="code" value="enter code" class="form-control" style="width: 100%; height: 60px; background-color:#F3F3F3 ;">
+                </div>
+                <h3 style="font-weight: bold; margin-top: 20px;">Your Order</h3>
+                <div class="header " style="background-color: white;">
+                    <div class="row">
+                        <div class="col-2">Prodect </div><div class="col-8"></div>
+                        <div class="col-2">Total </div>
+                    </div>
+
+                    @*@foreach (var item in Model)
+                    {
+                        <hr>
+                        <div class="row">
+                            <div class="col-3">@item.Product.Name</div><div class="col-7"></div>
+                            <div class="col-2">@item.Price $ </div>
+                        </div>
+                    }*@
+                    @{ if (Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <hr>
+                                <div class="row">
+                                    <div class="col-3">@item.Name</div><div class="col-7"></div>
+                                    <div class="col-2">@item.Price $ </div>
+                                </div>
+                            }
+                        }
+                    }
+
+
+                    @*<hr>
+        <div class="row">
+            <div class="col-3">Prodect 2</div><div class="col-7"></div>
+            <div class="col-2">25$ </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <div class="col-2"> Total </div><div class="col-8"></div>
+            <div class="col-2" style="color: #F1C055;">25$ </div>
+        </div>*@
+
+                    <div class="justify-content-left" style="text-align: left;">
+                        <input type="checkbox" name="Payment" style="margin-right: 10px;">Cheque Payment<BR>
+                        <input type="checkbox" name="Paypal" style="margin-right: 10px;">Paypal<BR>
+
+                    </div>
+                    <div style="clear: both;"></div>
+                    <button type="button" class="btn btn-dark"> PLACE ORDER</button>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        var ExtraData =
+        {
+            FirstName: document.getElementById("FirstName").innerHTML,
+            LastName: document.getElementById("LastName").innerHTML,
+            CompanyName: document.getElementById("CompanytName").innerHTML,
+            Country: document.getElementById("Country").innerHTML,
+            StreetAdress: document.getElementById("StreetAdress").innerHTML,
+            PostCode: document.getElementById("PostCode").innerHTML,
+            Phone: document.getElementById("Phone").innerHTML,
+            Email: document.getElementById("Email").innerHTML,
+            City: document.getElementById("City").innerHTML
+
+        }
+    </script>
+</body>
+</html>
+

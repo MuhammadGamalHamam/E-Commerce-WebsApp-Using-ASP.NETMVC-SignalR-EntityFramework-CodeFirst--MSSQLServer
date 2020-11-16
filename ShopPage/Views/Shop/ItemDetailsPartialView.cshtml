@@ -1,0 +1,85 @@
+﻿@model Item
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-lg-11 col-md-11 col-sm-11 col-11">
+            <img src="~/img/products/@Model.Picture" class="mx-auto d-block" style="width: 100%; height: auto;">
+        </div>
+        <div class="col-lg-11 col-md-11 col-sm-11 col-11">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr>
+                        <th scope="row">Item Name: </th>
+                        <td>@Model.Name</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Item Product Name: </th>
+                        <td>@Model.Product.Name</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Brand: </th>
+                        <td>@Model.Brand</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Size: </th>
+                        <td>@Model.Size</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Color: </th>
+                        <td>@Model.Color</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Price: </th>
+                        <td>@Model.Price $</td>
+                    </tr>
+
+                    @if (Model.Discount != 0)
+                    {
+                        <tr>
+                            <th scope="row">Discount: </th>
+                            <td>@Model.Discount %</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Price After Discount: </th>
+                            <td>@String.Format("{0:0.00}", Model.Price - ((Model.Price * Model.Discount) / 100)) $</td>
+                        </tr>
+                    }
+
+                    <tr>
+                        <th scope="row">Availabity: </th>
+                        @if (Model.UnitsInStock > 0)
+                        {
+                            <td>Available in Stock</td>
+                        }
+                        else
+                        {
+                            <td>Not Available in Stock</td>
+                        }
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Rank: </th>
+                        <td>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= Model.Rank)
+                                {
+                                    <i class="fas fa-star" style="color: gold;">&nbsp;</i>
+                                }
+                                else
+                                {
+                                    <i class="far fa-star" style="color: gold;">&nbsp;</i>
+                                }
+                            }
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,516 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+
+}
+
+@model ShopPage.Models.IndexViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/79efc19537.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="~/css/style-home.css">
+
+    <!-- font aowsome -->
+    <script src="https://kit.fontawesome.com/79efc19537.js" crossorigin="anonymous"></script>
+
+
+    <title>HomePage</title>
+</head>
+
+
+<body>
+
+
+    <div class="container-fluid   ">
+
+        <!-- hero section begin -->
+        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active" data-interval="1500">
+                    <img src="/img/hero-1.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p style="color:darkorange; "> BAG.Kids</p>
+                        <h1 style="color: black; font-size: 4rem; font-weight: bold;">Black Friday</h1>
+                        <p style="color: grey">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                            do ipsum dolor sit amet, consectetur adipisicing elit
+                        </p>
+                        <a href="/shop/index" class="btn " style="background-color: darkorange; font-weight: bold; color:papayawhip;">
+                            Shop Now
+                        </a>
+                    </div>
+                </div>
+
+                <div class="carousel-item " data-interval="1500">
+                    <img src="/img/hero-2.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <p style="color:darkorange; "> BAG.Kids</p>
+                        <h1 style="color: black; font-size: 4rem; font-weight: bold;">Big Brands</h1>
+                        <p style="color: grey">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                            do ipsum dolor sit amet, consectetur adipisicing elit
+                        </p>
+                        @*onclick="location.href =@Url.Action("index", "shop")"*@
+                        @*<button type="button" class="btn " style="background-color: darkorange; font-weight: bold;"
+                                onclick="location.href =@Url.Action("index", "shop")">
+                            Shop Now
+                        </button>*@
+                        <a href="/shop/index" class="btn " style="background-color: darkorange; font-weight: bold; color:papayawhip;">
+                            Shop Now
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            @*<a class="carousel-control-prev  " href="#carouselExampleFade" role="button" data-slide="prev" style="color: black;">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next  owl-next" href="#carouselExampleFade" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>*@
+        </div>
+        <!-- hero section end -->
+
+        <br> <br>
+
+        <!-- banner section begin -->
+        <div class="row justify-content-center " id="section1">
+
+            <div class="col-11 ">
+                <div class="row  ">
+                    <div class=" col-md-4 center_col ">
+                        <img src="\img\banner-1.jpg" class="" style="width: 100%; height: auto;">
+                        <h4 style="background-color:white; width: auto; height:auto; text-align: center;" class="py-2">
+                            Men`s
+                        </h4>
+                    </div>
+
+                    <div class=" col-md center_col ">
+                        <img src="\img\banner-2.jpg" class="" style="width: 100%; height: auto;">
+                        <h4 style="background-color:white; width: auto; height:auto; text-align: center;" class="py-2">
+                            Women`s
+                        </h4>
+                    </div>
+
+                    <div class=" col-md center_col ">
+                        <img src="\img\banner-3.jpg" class="" style="width: 100%; height: auto;">
+                        <h4 style="background-color:white; width: auto; height:auto; text-align: center;" class="py-2">
+                            Kid`s
+                        </h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- banner section end -->
+
+        <br><br><br>
+
+        <!-- women section begin -->
+
+        <div class="row justify-content-center ">
+
+            <div class="col-md-3">
+                <div class=" product-large   center_col" style="height:100%">
+                    <img src="/img/products/women-largen.jpg" style="width: 100%; height:100%">
+                    <h2>Women’s</h2>
+                    <a href="/shop/index">Discover More</a>
+                </div>
+            </div>
+
+            <div class="col-md-8 border">
+
+                <div class="row  justify-content-center" style="width: 100%;">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Clothings</li>
+                            <li>HandBag</li>
+                            <li>Shoes</li>
+                            <li>Accessories</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="row justify-content-center" style="width: 100%;">
+                    @foreach (var item in Model.WomenList)
+                    {
+                        <div class="col-sm-4">
+                            <div class="pi-text center_col">
+                                <img src="/img/products/@item.Picture" class="card-img-top" alt="...">
+                                <br>
+                                <div class="catagory-name">@item.Brand</div>
+                                <a href="#">
+                                    <h5>@item.Name</h5>
+                                </a>
+                                <div class="product-price">
+                                    $@item.Price
+                                </div>
+                            </div>
+                        </div>
+                    }
+                  
+                </div>
+            </div>
+
+        </div>
+
+        <!-- women section end -->
+
+        <br> <br> <br>
+
+        <!-- Deal Of The Week Section Begin-->
+        <div class="row justify-content-center " id="WomenSection" style="height: 80vh;">
+
+            <div class="col-11 " style="background-image: url('/img//time-bg.jpg'); background-size: cover;">
+                <div class="row  ">
+                    <div class=" col-md-6 center_col ">
+
+                        <h2 style="margin-top: 20%;">Deal Of The Week</h2>
+                        <hr width="20%" color="orange" style=" height:3px;">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br /> do ipsum dolor sit amet,
+                            consectetur adipisicing elit
+                        </p>
+                        <div class="product-price">
+                            $35.00
+                            <span style="font-size: 20px; color:gray ;font-weight:300;">/ HanBag</span>
+                        </div> <br>
+
+                        <div class="countdown-timer">
+                            <div class="cd-item">
+                                <span id="days" class="product-price"></span>
+                                <p>Days</p>
+                            </div>
+                            <div class="cd-item">
+                                <span id="hours" class="product-price"></span>
+                                <p>Hrs</p>
+                            </div>
+                            <div class="cd-item">
+                                <span id="mins" class="product-price"></span>
+                                <p>Mins</p>
+                            </div>
+                            <div class="cd-item">
+                                <span id="secs" class="product-price"></span>
+                                <p>Secs</p>
+                            </div>
+                        </div>
+                        <br>
+                        <a href="/shop/index" class="btn " style="background-color:darkorange; color:papayawhip">
+                            @*<button type="button" class="btn " style="background-color:darkorange">*@
+                                Shop Now
+                            @*</button>*@
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Deal Of The Week Section End-->
+
+
+        <br><br><br> <br> <br><br>
+
+        <!-- Men section begin -->
+
+        <div class="row justify-content-center ">
+
+            <div class="col-md-8 border">
+
+                <div class="row  justify-content-center" style="width: 100%;">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Clothings</li>
+                            <li>HandBag</li>
+                            <li>Shoes</li>
+                            <li>Accessories</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row justify-content-center" style="width: 100%;">
+
+                    @foreach (var item in Model.MenList)
+                    {
+                        <div class="col-sm-4 ">
+                            <div class="pi-text center_col">
+                                <img src="/img/products/@item.Picture" class="card-img-top" alt="...">
+                                <br>
+                                <div class="catagory-name">@item.Brand</div>
+                                <a href="#">
+                                    <h5>@item.Name</h5>
+                                </a>
+                                <div class="product-price">
+                                    $@item.Price
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-3">
+                <div class=" product-large  center_col" style="height:100%">
+                    <img src="/img/products/man-largen.jpg" style="width: 100%; height:100%">
+                    <h2>Men’s</h2>
+                    <a href="/shop/index">Discover More</a>
+                </div>
+            </div>
+
+
+
+        </div>
+
+
+        <!-- Men section end -->
+
+        <br><br><br>
+        <!-- instgram section Begin -->
+
+        <div class="row justify-content-center  " id="InstgramSection">
+            <!-- background-image: url('/img/insta-1.jpg');  background-size: cover; -->
+            <div class=" col-md-2 ">
+                <img src="/img/insta-1.jpg" style="width: 100%; ">
+                <div class="inside-text center_col">
+                    <i class="fab fa-instagram" style="font-size: 30px; color:white "></i>
+                    <h5><a href="#" style="color: white;">colorlib_Collection</a></h5>
+                </div>
+            </div>
+
+            <div class=" col-md-2 ">
+                <img src="/img/insta-2.jpg" style="width: 100%;">
+                <div class="inside-text center_col">
+                    <i class="fab fa-instagram" style="font-size: 30px; color:white;"></i>
+                    <h5><a href="#" style="color: white;">colorlib_Collection</a></h5>
+                </div>
+            </div>
+
+            <div class=" col-md-2 ">
+                <img src="/img/insta-3.jpg" style="width: 100%;">
+                <div class="inside-text center_col">
+                    <i class="fab fa-instagram" style="font-size: 30px; color:white;"></i>
+                    <h5><a href="#" style="color: white;">colorlib_Collection</a></h5>
+                </div>
+            </div>
+
+            <div class=" col-md-2  ">
+                <img src="/img/insta-4.jpg" style="width: 100%;">
+                <div class="inside-text center_col">
+                    <i class="fab fa-instagram" style="font-size: 30px; color:white;"></i>
+                    <h5><a href="#" style="color: white;">colorlib_Collection</a></h5>
+                </div>
+            </div>
+
+            <div class=" col-md-2 ">
+                <img src="/img/insta-5.jpg" style="width: 100%;">
+                <div class="inside-text center_col">
+                    <i class="fab fa-instagram" style="font-size: 30px; color: white; "></i>
+                    <h5><a href="#" style="color: white;">colorlib_Collection</a></h5>
+                </div>
+            </div>
+
+            <div class=" col-md-2 ">
+                <img src="/img/insta-6.jpg" style="width: 100%;">
+                <div class="inside-text center_col">
+                    <i class="fab fa-instagram" style="font-size: 30px; color: white; "></i>
+                    <h5><a href="#" style="color: white;">colorlib_Collection</a></h5>
+                </div>
+            </div>
+
+        </div>
+        <!-- instgram section End -->
+
+
+
+
+
+        <br><br> <br>
+        <!-- Blog section Start -->
+
+        <div class="row justify-content-center ">
+            <div class="col-11  ">
+                <p style="text-align: center; font-size: 3em; font-weight:bold;color: black;">
+                    <br> From The Blog
+                </p>
+                <hr width="20%" color="orange" style=" height:3px;"> <br> <br>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row justify-content-center ">
+            <div class="col-11">
+                <div class=" row justify-content-center">
+
+                    <div class="col-sm-4  ">
+                        <img src="/img/latest-1.jpg" style="width: 100%;height: auto;">
+                        <span>
+                            <p style="font-size: 2vh; color: gray; float: left;">
+                                Ham Brook • Jan 18, 2019 ..
+                            </p>
+                            <p style="font-size: 2vh; color:orange; ">
+                                News
+                            </p>
+                        </span>
+                        <!-- <a href="#"> -->
+                        <p style="font-size: 3vh; color: black; font-weight: 500;">
+                            The best Street Style From London Fashoin Week
+                        </p>
+                        <!-- </a> -->
+                        <p style=" font-size: 3vh;  color: #999999;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Natus eligendi nobis ea maiores sapiente
+                        </p>
+                    </div>
+                    <div class="col-sm-4  ">
+                        <img src="/img/latest-2.jpg" style="width: 100%;height: auto;">
+                        <span>
+                            <p style="font-size: 2vh; color: gray; float: left;">
+                                Ham Brook • Jan 18, 2019 ..
+                            </p>
+                            <p style="font-size: 2vh; color:orange; ">
+                                News
+                            </p>
+                        </span>
+                        <!-- <a href="#"> -->
+                        <p style="font-size: 3vh; color: black; font-weight: 500;">
+                            Vogu`s Ultimate Guide To Winter 2019 Shoes
+                        </p>
+                        <!-- </a> -->
+                        <p style=" font-size: 3vh;  color: #999999;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Natus eligendi nobis ea maiores sapiente
+                        </p>
+                    </div>
+                    <div class="col-sm-4  ">
+                        <img src="/img/latest-3.jpg" style="width: 100%;height: auto;">
+                        <span>
+                            <p style="font-size: 2vh; color: gray; float: left;">
+                                Ham Brook • Jan 18, 2019 ..
+                            </p>
+                            <p style="font-size: 2vh; color:orange; ">
+                                News
+                            </p>
+                        </span>
+                        <!-- <a href="#"> -->
+                        <p style="font-size: 3vh; color: black; font-weight: 500;">
+                            How to Brighten YOur Woredrobe With A dash Of Lime
+                        </p>
+                        <!-- </a> -->
+                        <p style=" font-size: 3vh;  color: #999999;">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Natus eligendi nobis ea maiores sapiente
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Blog section End -->
+
+        <br><br>
+
+
+        <!-- Last Section  -->
+
+        <div class=" row justify-content-center ">
+            <div class="col-11">
+                <div class="row justify-content-center  border  ">
+
+                    <div class="col-md-4  ">
+                        <div class=" row center_row">
+                            <div class="col-sm-4"> <img src="/img/icon-1.png" alt=""></div>
+                            <div class="col-sm-8"> <h>Free Shipping</h> <p>For all Orders Over 99$</p></div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4  ">
+                        <div class=" row center_row">
+                            <div class="col-sm-4"> <img src="/img/icon-2.png" alt=""></div>
+                            <div class="col-sm-8"> <h>Deliver On Time</h> <p>If Good Have Problems</p></div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4  ">
+                        <div class=" row center_row">
+                            <div class="col-sm-4"> <img src="/img/icon-3.png" alt=""></div>
+                            <div class="col-sm-8"> <h>Secure Payment </h> <p>100% secure Payment</p></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+       <br />
+    </div>
+    <!-- page end -->
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script src="~/js/scripts-home.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<div class="jumbotron">
+        <h1>ASP.NET</h1>
+        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Getting started</h2>
+            <p>
+                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                enables a clean separation of concerns and gives you full control over markup
+                for enjoyable, agile development.
+            </p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Get more libraries</h2>
+            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Web Hosting</h2>
+            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+            <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        </div>
+    </div>*@

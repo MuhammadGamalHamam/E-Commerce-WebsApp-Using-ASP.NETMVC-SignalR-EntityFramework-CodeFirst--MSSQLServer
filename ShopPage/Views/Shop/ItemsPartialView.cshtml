@@ -1,0 +1,61 @@
+﻿@model List<Item>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <div style="display: inline-block;" class="col-sm-11 col-lg-3 col-11 col-md-3 px-0 m-3">
+            <div class="" id="test" style="position: relative;">
+                <img src="~/img/products/@item.Picture" class="mx-auto d-block" style="width: 100%; height: auto;">
+                <div class="overlay"></div>
+                <div class="button">
+                    @*@Html.ActionLink("Add To Cart ", "Index", "Home", null, new
+                    {
+                        @class = "btn rounded mx-2 mb-1",
+                        @style = "text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.9em;"
+                    })
+                    <br>
+                    @Html.ActionLink("Show Details", "Index", "Home", null, new
+                    {
+                        @class = "btn rounded mx-2 mb-1",
+                        @style = "text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.87em;"
+                    })*@
+                    <button type="button" class="btn rounded mx-2 mb-1" onclick="AddToCart(@item.ID)"
+                            style="text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.9em;">
+                        Add To Cart&nbsp;
+                    </button><br>
+                    <button type="button" class="btn rounded mx-2 mb-1" onclick="ItemDetails(@item.ID)"
+                            style="text-align: center; z-index: 1; background-color: #E7AB3C; color: white; font-size: 0.9em;">
+                        Show Details
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center px-3 pb-3 justify-content-center">
+                <div class="form-text text-muted pt-3 pb-1" style="font-family: Overpass; font-size: 12px;">
+                    @item.Product.Name
+                </div>
+                <div class="text-dark" style="font-family: Overpass; font-size: 20px;">@item.Name</div>
+                <div style="font-family: Overpass;">
+                    @if (item.Discount != 0)
+                    {
+                        <span style="color: #E7AB3C;">$@String.Format("{0:0.00}", item.Price - ((item.Price * item.Discount) / 100))</span>
+                        <span class="text-muted"
+                              style="font-size: 13px; text-decoration: line-through;">$@item.Price</span>
+                        }
+                        else
+                        {
+                            <span style="color: #E7AB3C;">$@item.Price</span>
+                            <span class="text-muted" style="font-size: 13px; text-decoration: line-through;"></span>
+                        }
+                </div>
+            </div>
+        </div>
+    }
+}
+@*else
+{
+    <div style="display: inline-block;" class="col-sm-11 col-lg-9 col-11 col-md-9 px-0 m-3">
+        <h4>@ViewBag.Message</h4>
+    </div>
+}*@

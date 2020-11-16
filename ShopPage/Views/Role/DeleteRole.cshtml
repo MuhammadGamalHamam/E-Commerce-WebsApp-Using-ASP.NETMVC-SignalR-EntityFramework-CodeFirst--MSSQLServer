@@ -1,0 +1,43 @@
+﻿@model ShopPage.RoleModelView
+
+@{
+    ViewBag.Title = "DeleteRole";
+}
+
+    <div class="container-fluid justify-content-center">
+        <h2>DeleteRole</h2>
+
+        <h3>Are you sure you want to delete this?</h3>
+        <div>
+
+            <hr />
+            <dl class="dl-horizontal">
+                @*<dt>
+                    @Html.DisplayNameFor(model => model.RoleId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RoleId)
+                </dd>*@
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RoleName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RoleName)
+                </dd>
+
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <input type="submit" value="Delete" class="btn btn-danger" /> |
+                    @Html.ActionLink("Back to List", "AllRoles", "Role")
+                </div>
+            }
+        </div>
+    </div>

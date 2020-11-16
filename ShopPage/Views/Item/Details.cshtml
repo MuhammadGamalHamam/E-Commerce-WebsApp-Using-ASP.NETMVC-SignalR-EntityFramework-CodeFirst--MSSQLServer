@@ -1,0 +1,124 @@
+﻿@model ShopPage.Item
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    @ViewBag.error
+    <dl class="dl-horizontal">
+
+        <dt>
+            Category Name
+        </dt>
+
+        <dd>
+            @ViewBag.catName
+        </dd>
+
+        <dt>
+            Product Name
+        </dt>
+
+        <dd>
+            @ViewBag.prodName
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitsInStock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitsInStock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Picture)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rank)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rank)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+    </dl>
+</div>
+<div id="id">@Model.ID</div>
+<a href="" class="btn btn-success" id="stor">Add to Cart </a>
+<a href="/item/Cart" class="btn btn-success"> show  Cart </a>
+
+
+
+@section scripts{
+    <script>$('#stor').click(function () {
+            var id = document.getElementById("id").innerHTML;
+            $.ajax({
+                url: "/item/AddCart/" + id,
+                type: "POST",
+
+                //dataType: "json",
+                //traditional: true,
+                //contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert(data);
+                    //alert(typeof data);
+                    //debugger;
+                    if (data == "True") {
+                        alert("Item is Add");
+                    }
+                    if (data == "False") {
+                        alert("Item is out of stock");
+                    }
+
+                },
+                error: function () {
+                    alert("An error has occured!!!");
+                }
+            });
+        });</script>
+}

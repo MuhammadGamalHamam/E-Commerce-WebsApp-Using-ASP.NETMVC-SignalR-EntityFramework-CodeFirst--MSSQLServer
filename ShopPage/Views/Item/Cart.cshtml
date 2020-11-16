@@ -1,0 +1,99 @@
+﻿@model List<ShopPage.ViewModel.ItemQuentety>
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+
+
+
+@if (ViewBag.count > 0)
+{
+    <table border="1" class="table  table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">
+                    ID
+                </th>
+                <th scope="col">
+                    item Note
+                </th>
+                <th scope="col">
+                    Picture
+                    
+                </th>
+                <th scope="col">
+                    item Size
+                </th>
+                <th scope="col">
+                    item Rank
+                </th>
+                <th scope="col">
+                    item Price
+                </th>
+                <th scope="col">
+                    count
+                </th>
+                <th scope="col">
+                    total
+                </th>
+                <th scope="col">
+                    delete
+                </th>
+
+
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.item.ID
+                </td>
+                <td>
+                    @item.item.Note
+                </td>
+                <td>
+                   <img src="~/img/products/@item.item.Picture" style="width:100px ; height:100px" />
+                    
+                </td>
+                <td>
+                    @item.item.Size
+                </td>
+                <td>
+                    @item.item.Rank
+                </td>
+                <td>
+                    @item.item.Price
+                </td>
+                <td>
+                    @item.count
+                </td>
+                <td>
+                    @item.total
+                </td>
+                <td>
+                    @Html.ActionLink("Delete Item From Cart", "DeleteItemFromCart", new { @item.item.ID })
+
+                </td>
+
+            </tr>
+        }
+        <tr>
+            <td>
+                Total Price of All Item = @ViewBag.total
+            </td>
+        </tr>
+    </table>
+    <div>
+        Total Price of All Item = @ViewBag.total
+    </div>
+
+    @Html.ActionLink("Paiment", "Paiment", new { @ViewBag.total }, new { @class = "badge badge-secondary p-1" })
+    @Html.ActionLink("Back to List", "ShowAll", "Item")
+
+}
+else
+{
+    <h2>cart is empty</h2>
+}

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ShopPage.Category>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Picture)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    <a href="#" class="small-box-footer" onclick="getPatial('/category/Edit/@item.ID')"> Edit <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="#" class="small-box-footer" onclick="getDetails('/category/Details/@item.ID')"> Details <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="#" class="small-box-footer" onclick="getPatial('/category/Delete/@item.ID')"> Delete <i class="fas fa-arrow-circle-right"></i></a>
+
+                    <!--
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                -->
+                </td>
+            </tr>
+        }
+       
+
+    </table>

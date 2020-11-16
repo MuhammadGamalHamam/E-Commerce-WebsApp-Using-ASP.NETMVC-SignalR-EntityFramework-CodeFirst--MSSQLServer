@@ -1,0 +1,65 @@
+﻿@model ShopPage.Product
+
+<div>
+    <h4>Product Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Category.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailableColors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailableColors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailableSizes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailableSizes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductAvailable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductDiscount)
+        </dd>
+
+    </dl>
+</div>
+

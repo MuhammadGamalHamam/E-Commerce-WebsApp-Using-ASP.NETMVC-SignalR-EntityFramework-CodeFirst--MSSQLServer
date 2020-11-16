@@ -1,0 +1,256 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <style>
+        .list-group a {
+            text-align: center;
+        }
+
+
+        .small-box > .inner {
+            padding: 10px;
+        }
+
+        .small-box > .small-box-footer {
+            background: rgba(0, 0, 0, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            display: block;
+            padding: 3px 0;
+            position: relative;
+            text-align: center;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+            .small-box > .small-box-footer:hover {
+                background: rgba(0, 0, 0, 0.15);
+                color: #ffffff;
+            }
+
+        .small-box h3 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            padding: 0;
+            white-space: nowrap;
+        }
+    </style>
+
+    <title>Dashboard</title>
+</head>
+<body>
+
+    <div class="container-fluid  ">
+        <br><br>
+        <div class="row">
+            <div class="col-md-3" style="">
+                <div class="btn-group-vertical" style="width: 100%;" id="accordion">
+                    <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#Example1">
+                        Users
+                    </button>
+                    <div class="collapse " id="Example1" style="width:100%">
+                        <div class="list-group" style="width:100%" onclick="">
+
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick=" getPatial('/Account/AllUsers');">All Users</a>
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick=" getPatial('/Account/AddUser');">Add</a>
+
+                            <!-- <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a> -->
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#Example2">
+                        Orders
+                    </button>
+                    <div class="collapse " id="Example2" style="width:100%">
+                        <div class="list-group" style="width:100%" onclick="">
+                            <a href="#MyBody" class="list-group-item list-group-item-action " onclick=" getPatial('/order/showall');">Show All</a>
+
+                            <!-- <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a> -->
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#Example3">
+                        Ctegories
+                    </button>
+                    <div class="collapse " id="Example3" style="width:100%">
+                        <div class="list-group" style="width:100%" onclick="">
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick="getPatial('/category/index');">Show All</a>
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick=" getPatial('/category/Create');">Add</a>
+                            <!-- <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a> -->
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#Example4">
+                        Products
+                    </button>
+                    <div class="collapse " id="Example4" style="width:100%">
+                        <div class="list-group" style="width:100%" onclick="">
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick=" getPatial('/Product/index');">Show All</a>
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick=" getPatial('/product/create');">Add</a>
+
+                            <!-- <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a> -->
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-dark" data-toggle="collapse" data-target="#Example5">
+                        Items
+                    </button>
+                    <div class="collapse " id="Example5" style="width:100%">
+                        <div class="list-group" style="width:100%" onclick="">
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick=" getPatial('/item/showall');">Show All</a>
+                            <a href="#MyBody" class="list-group-item list-group-item-action" onclick=" getPatial('/item/new');">Add</a>
+
+                            <!-- <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">Vestibulum at eros</a> -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- this is the row with colors :) -->
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-info">
+                            <div class="inner">
+                                <h3>150</h3>
+
+                                <p>New Orders</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-bag"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-success">
+                            <div class="inner">
+                                <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                                <p>Bounce Rate</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-warning">
+                            <div class="inner">
+                                <h3>44</h3>
+
+                                <p>User Registrations</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>65</h3>
+
+                                <p>Unique Visitors</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+                    <!-- ./col -->
+                </div>
+                <br />
+                <div class="row border-dark" id="MyBody">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<div class="modal" id="DetailsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="ModalBody">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<script type="text/javascript">
+
+    function getPatial(link) {
+
+        $.ajax({
+
+            type: "get",
+            url: link,
+            success: function (res) {
+                /* d is the HTML of the returned response */
+                //$("#" + id).html(d);
+                $("#MyBody").html(res);   //replaces previous HTML with action
+
+            }
+        });
+
+    }
+
+    function getDetails(Myurl) {
+
+        $.ajax({
+
+            type: "get",
+            url: Myurl,
+            success: function (d) {
+                /* d is the HTML of the returned response */
+                //$("#" + id).html(d);
+                $("#ModalBody").html(d);   //replaces previous HTML with action
+                $("#DetailsModal").modal("show");
+            }
+        });
+
+    }
+</script>

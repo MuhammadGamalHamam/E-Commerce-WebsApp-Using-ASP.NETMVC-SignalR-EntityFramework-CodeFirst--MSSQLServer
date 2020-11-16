@@ -1,0 +1,70 @@
+﻿@model IEnumerable<ShopPage.Product>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Category Name
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableColors)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableSizes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDiscount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableColors)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableSizes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductAvailable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductDiscount)
+        </td>
+        <td>
+            <a href="#" class="small-box-footer" onclick="getPatial('/product/Edit/@item.ID')"> Edit <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer" onclick="getDetails('/product/Details/@item.ID')"> Details <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="#" class="small-box-footer" onclick="getPatial('/product/Delete/@item.ID')"> Delete <i class="fas fa-arrow-circle-right"></i></a>
+
+            <!--
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })                
+            -->
+
+        </td>
+    </tr>
+}
+
+</table>

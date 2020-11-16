@@ -1,0 +1,157 @@
+﻿/* from the original page */
+.product-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: #e7ab3c;
+}
+
+.countdown-timer .cd-item {
+    display: inline-block;
+    background: #ffffff;
+    margin-right: 35px;
+    padding: 10px 14px;
+    border-radius: 5px;
+}
+
+.pi-text .catagory-name {
+    font-size: 10px;
+    color: #b2b2b2;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.pi-text a {
+    text-decoration: none;
+}
+
+    .pi-text a h5 {
+        color: #252525;
+    }
+
+/* instgram section */
+#InstgramSection img {
+    width: 100%;
+    height: 100%;
+}
+
+.inside-text {
+    visibility: hidden;
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    right: 20%;
+}
+
+#InstgramSection div:hover {
+    opacity: .7;
+}
+
+    #InstgramSection div:hover .inside-text {
+        visibility: visible;
+    }
+
+
+/* wonmen section  */
+
+.product-large h2 {
+    /* width: 30%; */
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 600;
+    position: absolute;
+    /* left:32%; */
+    /* right: 32%; */
+    top: 35%;
+}
+
+.product-large a {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+    position: absolute;
+}
+
+.filter-control {
+    text-align: center;
+    margin-bottom: 45px;
+    padding-top: 32px;
+}
+
+    .filter-control ul li {
+        list-style: none;
+        display: inline-block;
+        font-size: 20px;
+        color: #b2b2b2;
+        margin-right: 22px;
+        position: relative;
+        cursor: pointer;
+    }
+
+        .filter-control ul li.active {
+            color: #171717;
+        }
+
+            .filter-control ul li.active:before {
+                opacity: 1;
+            }
+
+        .filter-control ul li:before {
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 2px;
+            background: #171717;
+            content: "";
+            opacity: 0;
+        }
+/* women page  */
+/* carosel */
+
+
+
+
+/* my own */
+.center_col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.center_row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-caption {
+    position: absolute;
+    left: auto;
+    right: auto;
+    width: 40%;
+    height: 100%;
+    opacity: 0.8;
+    bottom: 0;
+    left: 10%;
+    top: 15%;
+    text-align: left;
+}
+
+#carouselExampleFade {
+    height: 80vh;
+}
+
+#section1 h4 {
+    position: absolute;
+    top: 40%;
+    right: 27%;
+    left: 27%;
+}
+
+#womenSection {
+    height: 60vh;
+}
